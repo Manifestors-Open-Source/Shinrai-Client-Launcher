@@ -268,6 +268,34 @@ namespace Shinrai_Client_Launcher
             guna2Panel6.Show();
             guna2Panel1.Hide();
         }
+
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            btnLogin_Click();
+        }
+        private async void btnLogin_Click()
+        {
+            try
+            {
+                ManifestorsAuthEngine.ClientID = "00000000402b5328"; // veya kendi ClientID'n
+
+                ManifestorsAuthEngine.OnStatusUpdate += (status) =>
+                {
+                    // Ýstersen burada form üzerindeki label veya progress güncelle
+                    Console.WriteLine("Durum: " + status);
+                };
+
+                await ManifestorsAuthEngine.StartEngine();
+
+                var profile = ManifestorsAuthEngine.Get();
+
+                MessageBox.Show($"Hoþgeldin {profile.Name} (UUID: {profile.Id})");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message);
+            }
+        }
     }
 }
 

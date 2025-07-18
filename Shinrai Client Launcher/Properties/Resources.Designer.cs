@@ -143,6 +143,16 @@ namespace Shinrai_Client_Launcher.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap Microsoft_Logo {
+            get {
+                object obj = ResourceManager.GetObject("Microsoft_Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap ShinraiLogo {
             get {
                 object obj = ResourceManager.GetObject("ShinraiLogo", resourceCulture);
