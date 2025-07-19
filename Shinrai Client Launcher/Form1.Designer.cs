@@ -59,6 +59,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             pictureBox1 = new PictureBox();
             label1 = new Label();
@@ -249,7 +250,7 @@
             guna2Panel6.Controls.Add(label8);
             guna2Panel6.CustomizableEdges = customizableEdges5;
             guna2Panel6.FillColor = Color.FromArgb(100, 0, 0, 0);
-            guna2Panel6.Location = new Point(448, 29);
+            guna2Panel6.Location = new Point(448, 32);
             guna2Panel6.Name = "guna2Panel6";
             guna2Panel6.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2Panel6.Size = new Size(360, 470);
@@ -280,7 +281,7 @@
             guna2Button7.Size = new Size(323, 45);
             guna2Button7.TabIndex = 5;
             guna2Button7.Text = "Add New Accouınt";
-            guna2Button7.Click += guna2Button7_Click_1;
+            guna2Button7.Click += guna2Button7_Click_2;
             // 
             // guna2Panel8
             // 
@@ -456,6 +457,7 @@
             Controls.Add(pictureBox1);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 162);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;

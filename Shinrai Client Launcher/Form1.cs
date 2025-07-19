@@ -3,23 +3,35 @@ using System.Net.Http;
 using System.Security.Principal;
 using System.Text.Json;
 using System.Windows.Forms;
+using System.Drawing;
+using System.IO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Shinrai_Client_Launcher
 {
     public partial class Form1 : Form
     {
         int AccountCount = 0;
-
+        public static string SelectedAccountName;
+        public static AccountType SelectedAccountType;
+        public static string SelectedAccountCode;
         public enum AccountType
         {
             Premium,
             Offline
         }
 
+        private const string RedirectUri = "https://login.microsoftonline.com/common/oauth2/nativeclient";
+
         public class AccountEntry
         {
             public string username { get; set; }
             public string type { get; set; }
+            public string accessToken { get; set; }
         }
 
         public Form1()
@@ -73,7 +85,7 @@ namespace Shinrai_Client_Launcher
                 {
                     if (Enum.TryParse(acc.type, true, out AccountType typeEnum))
                     {
-                        AddUserLabel(acc.username, typeEnum);
+                        AddUserLabel(acc.username, typeEnum, acc.accessToken);
                     }
                     else
                     {
@@ -91,10 +103,9 @@ namespace Shinrai_Client_Launcher
             }
         }
 
-        private void AddAccountToJson(string filePath, string username, AccountType accountType)
+        private void AddAccountToJson(string filePath, string username, AccountType accountType, string accessToken)
         {
             List<AccountEntry> accountList = new List<AccountEntry>();
-
 
             if (File.Exists(filePath))
             {
@@ -119,22 +130,23 @@ namespace Shinrai_Client_Launcher
                 return;
             }
 
+            // Eðer Premium deðilse accessToken boþ döner
+            string tokenToSave = accountType == AccountType.Premium ? accessToken : string.Empty;
 
             accountList.Add(new AccountEntry
             {
                 username = username,
-                type = accountType.ToString()
+                type = accountType.ToString(),
+                accessToken = tokenToSave
             });
-
 
             string updatedJson = JsonSerializer.Serialize(accountList, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(filePath, updatedJson);
-
-
         }
 
 
-        void AddUserLabel(string UserName, AccountType AccountTypeS)
+
+        void AddUserLabel(string UserName, AccountType AccountTypeS, string accessToken)
         {
             Guna2Panel guna2PanelC = new Guna2Panel();
             guna2PanelC.BackColor = System.Drawing.Color.Transparent;
@@ -180,11 +192,63 @@ namespace Shinrai_Client_Launcher
             guna2ButtonC.Click += (s, args) =>
             {
 
-                MessageBox.Show($"Logging in as {UserName} with account type {AccountTypeS}.");
+                if (AccountTypeS == AccountType.Premium && !string.IsNullOrEmpty(accessToken))
+                {
+                    var account = GetAccountByUsername(UserName); // veya targetUsername
+
+                    if (account != null)
+                    {
+                        SelectedAccountName = account.username;
+                        SelectedAccountType = (AccountType)Enum.Parse(typeof(AccountType), account.type);
+                        SelectedAccountCode = account.accessToken;
+
+                        MainScreen mainScreen = new MainScreen();
+                        mainScreen.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Kullanýcý bulunamadý.");
+                    }
+
+
+
+
+                }
+                else
+                {
+                    SelectedAccountName = UserName;
+                    SelectedAccountType = AccountType.Offline;
+                    SelectedAccountCode = "";
+                    MainScreen mainScreen = new MainScreen();
+                    mainScreen.Show();
+                    this.Hide();
+                }
             };
             guna2PanelC.Controls.Add(guna2ButtonC);
-
         }
+
+        private AccountEntry GetAccountByUsername(string username)
+        {
+            string filePath = "accounts.json";
+
+            if (!File.Exists(filePath))
+                return null;
+
+            try
+            {
+                string json = File.ReadAllText(filePath);
+                var accountList = JsonSerializer.Deserialize<List<AccountEntry>>(json);
+
+                return accountList?.FirstOrDefault(a =>
+                    a.username.Equals(username, StringComparison.OrdinalIgnoreCase));
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -207,12 +271,13 @@ namespace Shinrai_Client_Launcher
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            AddAccountToJson("accounts.json", guna2TextBox1.Text, AccountType.Offline);
+            AddAccountToJson("accounts.json", guna2TextBox1.Text, AccountType.Offline, "");
             flowLayoutPanel1.Controls.Clear();
             LoadAccountsFromJson("accounts.json");
             guna2Panel1.Hide();
             guna2Panel6.Show();
         }
+
         private Image LoadSkin(string username)
         {
             string USR = username;
@@ -224,7 +289,6 @@ namespace Shinrai_Client_Launcher
             {
                 string uuidUrl = $"https://api.mojang.com/users/profiles/minecraft/{USR}";
 
-                // Senkron HTTP isteði
                 var response = client.GetAsync(uuidUrl).GetAwaiter().GetResult();
 
                 if (!response.IsSuccessStatusCode)
@@ -241,11 +305,9 @@ namespace Shinrai_Client_Launcher
             }
             catch
             {
-                throw;
+                return Properties.Resources.IconSearch;
             }
         }
-
-
 
         private void guna2Button8_Click(object sender, EventArgs e)
         {
@@ -271,31 +333,60 @@ namespace Shinrai_Client_Launcher
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            btnLogin_Click();
+            buttonLogin_Click();
         }
-        private async void btnLogin_Click()
+        private async void buttonLogin_Click()
         {
             try
             {
-                ManifestorsAuthEngine.ClientID = "00000000402b5328"; // veya kendi ClientID'n
+                ManifestorsAuthEngine.ClientID = "00000000402b5328";
+                string scope = Uri.EscapeDataString("XboxLive.signin offline_access");
+                string authUrl = $"https://login.live.com/oauth20_authorize.srf" +
+                                 $"?client_id={ManifestorsAuthEngine.ClientID}" +
+                                 $"&response_type=code" +
+                                 $"&redirect_uri={Uri.EscapeDataString(RedirectUri)}" +
+                                 $"&scope={scope}" +
+                                 $"&state=manifestors_state";
 
-                ManifestorsAuthEngine.OnStatusUpdate += (status) =>
+                using var oauthForm = new MicrosoftAuthForm(authUrl, RedirectUri);
+                oauthForm.Show();
+
+                string code = await oauthForm.WaitForCodeAsync();
+
+                if (string.IsNullOrEmpty(code))
                 {
-                    // Ýstersen burada form üzerindeki label veya progress güncelle
-                    Console.WriteLine("Durum: " + status);
-                };
+                    MessageBox.Show("Authorization code alýnamadý.");
+                    return;
+                }
 
-                await ManifestorsAuthEngine.StartEngine();
+                await ManifestorsAuthEngine.ExchangeCodeAndLoginAsync(code);
 
                 var profile = ManifestorsAuthEngine.Get();
 
-                MessageBox.Show($"Hoþgeldin {profile.Name} (UUID: {profile.Id})");
+             
+                var accountType = AccountType.Premium;
+
+              
+                string tokenToSave = string.IsNullOrEmpty(profile.Name) ? "" : ManifestorsAuthEngine.GetAccessToken();
+
+                AddAccountToJson("accounts.json", profile.Name, accountType, tokenToSave);
+
+                flowLayoutPanel1.Controls.Clear();
+                LoadAccountsFromJson("accounts.json");
+
+                guna2Panel1.Hide();
+                guna2Panel6.Show();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Hata: " + ex.Message);
             }
         }
+
+        private void guna2Button7_Click_2(object sender, EventArgs e)
+        {
+            guna2Panel1.Show();
+            guna2Panel6.Hide();
+        }
     }
 }
-

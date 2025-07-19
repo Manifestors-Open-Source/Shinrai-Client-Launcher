@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Shinrai_Client_Launcher
@@ -11,12 +12,35 @@ namespace Shinrai_Client_Launcher
     public static class ManifestorsAuthEngine
     {
         public static string ClientID { get; set; } = "";
+
         private const string RedirectUri = "https://login.microsoftonline.com/common/oauth2/nativeclient";
 
         private static string accessToken = null;
         private static MinecraftProfile profile = null;
+        public static string GetAccessToken()
+        {
+            return accessToken ?? string.Empty;
+        }
 
         public static event Action<string> OnStatusUpdate;
+
+        public static async Task ExchangeCodeAndLoginAsync(string code)
+        {
+            var token = await ExchangeCodeForTokenAsync(code);
+            accessToken = token.AccessToken;
+
+            var xblToken = await GetXboxLiveTokenAsync(accessToken);
+
+            var xstsToken = await GetXSTSTokenAsync(xblToken.Token);
+
+            var mcToken = await GetMinecraftTokenAsync(xstsToken);
+
+            accessToken = mcToken.AccessToken;
+
+            profile = await GetMinecraftProfileAsync(accessToken);
+
+            OnStatusUpdate?.Invoke("Giriş tamamlandı!");
+        }
 
         public static async Task StartEngine()
         {
@@ -25,44 +49,25 @@ namespace Shinrai_Client_Launcher
 
             OnStatusUpdate?.Invoke("OAuth URL hazırlanıyor...");
 
+            string scope = Uri.EscapeDataString("XboxLive.signin offline_access");
+
             string authUrl = $"https://login.live.com/oauth20_authorize.srf" +
                 $"?client_id={ClientID}" +
                 $"&response_type=code" +
                 $"&redirect_uri={Uri.EscapeDataString(RedirectUri)}" +
-                $"&scope=XboxLive.signin offline_access" +
+                $"&scope={scope}" +
                 $"&state=manifestors_state";
 
-            OpenBrowser(authUrl);
-            OnStatusUpdate?.Invoke("Tarayıcıda giriş sayfası açıldı.\n" +
-                                  "Lütfen giriş yapıp izin verin.\n" +
-                                  "Sonra açılan sayfada 'code' parametresini kopyalayıp buraya yapıştırın.");
+            OnStatusUpdate?.Invoke("Gömülü tarayıcıda giriş sayfası açılıyor...");
 
-            // Kullanıcıdan manuel olarak authorization code alınır
-            string code = await ManualCodeInputAsync();
+            string code = await GetCodeFromEmbeddedBrowserAsync(authUrl);
 
             if (string.IsNullOrWhiteSpace(code))
-                throw new Exception("Authorization code boş olamaz.");
+                throw new Exception("Authorization code alınamadı.");
 
             OnStatusUpdate?.Invoke("Authorization code alındı, token alınıyor...");
 
-            var token = await ExchangeCodeForTokenAsync(code);
-            accessToken = token.AccessToken;
-
-            OnStatusUpdate?.Invoke("Xbox Live token alınıyor...");
-            var xblToken = await GetXboxLiveTokenAsync(accessToken);
-
-            OnStatusUpdate?.Invoke("XSTS token alınıyor...");
-            var xstsToken = await GetXSTSTokenAsync(xblToken.Token);
-
-            OnStatusUpdate?.Invoke("Minecraft token alınıyor...");
-            var mcToken = await GetMinecraftTokenAsync(xstsToken);
-
-            accessToken = mcToken.AccessToken;
-
-            OnStatusUpdate?.Invoke("Minecraft profili alınıyor...");
-            profile = await GetMinecraftProfileAsync(accessToken);
-
-            OnStatusUpdate?.Invoke("Giriş tamamlandı!");
+            await ExchangeCodeAndLoginAsync(code);
         }
 
         private static void OpenBrowser(string url)
@@ -81,16 +86,22 @@ namespace Shinrai_Client_Launcher
             }
         }
 
-        private static async Task<string> ManualCodeInputAsync()
+        private static async Task<string> GetCodeFromEmbeddedBrowserAsync(string authUrl)
         {
-            Console.WriteLine("Lütfen tarayıcıdaki URL'deki 'code' parametresini buraya yapıştırın:");
-            string code = Console.ReadLine();
-            return await Task.FromResult(code);
+            var form = new MicrosoftAuthForm(authUrl, RedirectUri);
+            form.Show();
+
+            string code = await form.WaitForCodeAsync();
+
+            return code;
         }
 
         private class TokenResponse
         {
+            [JsonPropertyName("access_token")]
             public string AccessToken { get; set; }
+
+            [JsonPropertyName("refresh_token")]
             public string RefreshToken { get; set; }
         }
 
@@ -109,15 +120,16 @@ namespace Shinrai_Client_Launcher
             var res = await http.PostAsync("https://login.live.com/oauth20_token.srf", content);
             var json = await res.Content.ReadAsStringAsync();
 
-            using var doc = JsonDocument.Parse(json);
-            var accessToken = doc.RootElement.GetProperty("access_token").GetString();
-            var refreshToken = doc.RootElement.GetProperty("refresh_token").GetString();
+            var token = JsonSerializer.Deserialize<TokenResponse>(json);
+            if (token == null || string.IsNullOrEmpty(token.AccessToken))
+                throw new Exception("Token alınamadı: " + json);
 
-            return new TokenResponse { AccessToken = accessToken, RefreshToken = refreshToken };
+            return token;
         }
 
         private class XBLToken
         {
+            [JsonPropertyName("Token")]
             public string Token { get; set; }
         }
 
@@ -142,25 +154,32 @@ namespace Shinrai_Client_Launcher
             var res = await http.PostAsync("https://user.auth.xboxlive.com/user/authenticate", jsonContent);
             var json = await res.Content.ReadAsStringAsync();
 
-            using var doc = JsonDocument.Parse(json);
-            var token = doc.RootElement.GetProperty("Token").GetString();
+            var token = JsonSerializer.Deserialize<XBLToken>(json);
 
-            return new XBLToken { Token = token };
+            if (token == null || string.IsNullOrEmpty(token.Token))
+                throw new Exception("Xbox Live token alınamadı: " + json);
+
+            return token;
         }
 
         private class XSTSToken
         {
+            [JsonPropertyName("Token")]
             public string Token { get; set; }
+
+            [JsonPropertyName("DisplayClaims")]
             public DisplayClaims DisplayClaims { get; set; }
         }
 
         private class DisplayClaims
         {
+            [JsonPropertyName("xui")]
             public Xui[] Xui { get; set; }
         }
 
         private class Xui
         {
+            [JsonPropertyName("uhs")]
             public string Uhs { get; set; }
         }
 
@@ -186,14 +205,19 @@ namespace Shinrai_Client_Launcher
 
             var xstsToken = JsonSerializer.Deserialize<XSTSToken>(json);
 
-            if (xstsToken == null || string.IsNullOrEmpty(xstsToken.Token))
-                throw new Exception("XSTS token alınamadı.");
+            if (xstsToken == null || string.IsNullOrEmpty(xstsToken.Token) ||
+                xstsToken.DisplayClaims == null || xstsToken.DisplayClaims.Xui == null ||
+                xstsToken.DisplayClaims.Xui.Length == 0 || string.IsNullOrEmpty(xstsToken.DisplayClaims.Xui[0].Uhs))
+            {
+                throw new Exception("XSTS token veya DisplayClaims bilgisi alınamadı.\n" + json);
+            }
 
             return xstsToken;
         }
 
         private class MinecraftTokenResponse
         {
+            [JsonPropertyName("access_token")]
             public string AccessToken { get; set; }
         }
 
@@ -221,7 +245,10 @@ namespace Shinrai_Client_Launcher
 
         public class MinecraftProfile
         {
+            [JsonPropertyName("id")]
             public string Id { get; set; }
+
+            [JsonPropertyName("name")]
             public string Name { get; set; }
         }
 
