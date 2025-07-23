@@ -29,26 +29,26 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IconAddForm));
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             pictureBox1 = new PictureBox();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             btnSelectApath = new Guna.UI2.WinForms.Guna2Button();
             btnConvertToIcon = new Guna.UI2.WinForms.Guna2Button();
-            label13 = new Label();
-            label14 = new Label();
+            txtNewIconName = new Label();
+            txtOrginalPng = new Label();
             guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
-            label15 = new Label();
+            txtNewIcon = new Label();
             txtIconName = new Guna.UI2.WinForms.Guna2TextBox();
             label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -79,23 +79,23 @@
             guna2Panel2.BorderRadius = 15;
             guna2Panel2.Controls.Add(btnSelectApath);
             guna2Panel2.Controls.Add(btnConvertToIcon);
-            guna2Panel2.Controls.Add(label13);
-            guna2Panel2.Controls.Add(label14);
+            guna2Panel2.Controls.Add(txtNewIconName);
+            guna2Panel2.Controls.Add(txtOrginalPng);
             guna2Panel2.Controls.Add(guna2Panel3);
-            guna2Panel2.Controls.Add(label15);
+            guna2Panel2.Controls.Add(txtNewIcon);
             guna2Panel2.Controls.Add(txtIconName);
-            guna2Panel2.CustomizableEdges = customizableEdges9;
+            guna2Panel2.CustomizableEdges = customizableEdges19;
             guna2Panel2.FillColor = Color.FromArgb(100, 0, 0, 0);
             guna2Panel2.Location = new Point(12, 131);
             guna2Panel2.Name = "guna2Panel2";
-            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges20;
             guna2Panel2.Size = new Size(314, 367);
             guna2Panel2.TabIndex = 30;
             // 
             // btnSelectApath
             // 
             btnSelectApath.BorderRadius = 5;
-            btnSelectApath.CustomizableEdges = customizableEdges1;
+            btnSelectApath.CustomizableEdges = customizableEdges11;
             btnSelectApath.DisabledState.BorderColor = Color.DarkGray;
             btnSelectApath.DisabledState.CustomBorderColor = Color.DarkGray;
             btnSelectApath.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -105,7 +105,7 @@
             btnSelectApath.ForeColor = Color.White;
             btnSelectApath.Location = new Point(23, 204);
             btnSelectApath.Name = "btnSelectApath";
-            btnSelectApath.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnSelectApath.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btnSelectApath.Size = new Size(266, 45);
             btnSelectApath.TabIndex = 28;
             btnSelectApath.Text = "Select A File";
@@ -114,7 +114,7 @@
             // btnConvertToIcon
             // 
             btnConvertToIcon.BorderRadius = 5;
-            btnConvertToIcon.CustomizableEdges = customizableEdges3;
+            btnConvertToIcon.CustomizableEdges = customizableEdges13;
             btnConvertToIcon.DisabledState.BorderColor = Color.DarkGray;
             btnConvertToIcon.DisabledState.CustomBorderColor = Color.DarkGray;
             btnConvertToIcon.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -124,62 +124,62 @@
             btnConvertToIcon.ForeColor = Color.White;
             btnConvertToIcon.Location = new Point(23, 298);
             btnConvertToIcon.Name = "btnConvertToIcon";
-            btnConvertToIcon.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnConvertToIcon.ShadowDecoration.CustomizableEdges = customizableEdges14;
             btnConvertToIcon.Size = new Size(266, 45);
             btnConvertToIcon.TabIndex = 27;
             btnConvertToIcon.Text = "Convert to Icon";
             btnConvertToIcon.Click += btnConvertToIcon_Click;
             // 
-            // label13
+            // txtNewIconName
             // 
-            label13.Font = new Font("Comfortaa", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label13.ForeColor = Color.White;
-            label13.Location = new Point(0, 73);
-            label13.Name = "label13";
-            label13.Size = new Size(317, 29);
-            label13.TabIndex = 17;
-            label13.Text = "Icon Name";
-            label13.TextAlign = ContentAlignment.BottomCenter;
+            txtNewIconName.Font = new Font("Comfortaa", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            txtNewIconName.ForeColor = Color.White;
+            txtNewIconName.Location = new Point(0, 73);
+            txtNewIconName.Name = "txtNewIconName";
+            txtNewIconName.Size = new Size(317, 29);
+            txtNewIconName.TabIndex = 17;
+            txtNewIconName.Text = "Icon Name";
+            txtNewIconName.TextAlign = ContentAlignment.BottomCenter;
             // 
-            // label14
+            // txtOrginalPng
             // 
-            label14.Font = new Font("Comfortaa", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label14.ForeColor = Color.White;
-            label14.Location = new Point(3, 180);
-            label14.Name = "label14";
-            label14.Size = new Size(314, 21);
-            label14.TabIndex = 15;
-            label14.Text = "Orginal PNG Format Path";
-            label14.TextAlign = ContentAlignment.BottomCenter;
+            txtOrginalPng.Font = new Font("Comfortaa", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            txtOrginalPng.ForeColor = Color.White;
+            txtOrginalPng.Location = new Point(3, 180);
+            txtOrginalPng.Name = "txtOrginalPng";
+            txtOrginalPng.Size = new Size(314, 21);
+            txtOrginalPng.TabIndex = 15;
+            txtOrginalPng.Text = "Orginal PNG Format Path";
+            txtOrginalPng.TextAlign = ContentAlignment.BottomCenter;
             // 
             // guna2Panel3
             // 
             guna2Panel3.BorderRadius = 5;
-            guna2Panel3.CustomizableEdges = customizableEdges5;
+            guna2Panel3.CustomizableEdges = customizableEdges15;
             guna2Panel3.FillColor = Color.FromArgb(188, 0, 45);
             guna2Panel3.Location = new Point(112, 48);
             guna2Panel3.Name = "guna2Panel3";
-            guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges16;
             guna2Panel3.Size = new Size(90, 10);
             guna2Panel3.TabIndex = 17;
             // 
-            // label15
+            // txtNewIcon
             // 
-            label15.Font = new Font("Comfortaa", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label15.ForeColor = Color.White;
-            label15.Location = new Point(0, 13);
-            label15.Name = "label15";
-            label15.Size = new Size(314, 29);
-            label15.TabIndex = 16;
-            label15.Text = "Add a New Icon";
-            label15.TextAlign = ContentAlignment.MiddleCenter;
+            txtNewIcon.Font = new Font("Comfortaa", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            txtNewIcon.ForeColor = Color.White;
+            txtNewIcon.Location = new Point(0, 13);
+            txtNewIcon.Name = "txtNewIcon";
+            txtNewIcon.Size = new Size(314, 29);
+            txtNewIcon.TabIndex = 16;
+            txtNewIcon.Text = "txtNewIcon";
+            txtNewIcon.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // txtIconName
             // 
             txtIconName.BorderColor = Color.FromArgb(188, 0, 45);
             txtIconName.BorderRadius = 15;
             txtIconName.BorderThickness = 3;
-            txtIconName.CustomizableEdges = customizableEdges7;
+            txtIconName.CustomizableEdges = customizableEdges17;
             txtIconName.DefaultText = "";
             txtIconName.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtIconName.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -199,7 +199,7 @@
             txtIconName.PlaceholderForeColor = Color.Gainsboro;
             txtIconName.PlaceholderText = "Icon Name";
             txtIconName.SelectedText = "";
-            txtIconName.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtIconName.ShadowDecoration.CustomizableEdges = customizableEdges18;
             txtIconName.Size = new Size(266, 34);
             txtIconName.TabIndex = 26;
             // 
@@ -242,10 +242,10 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2Button btnSelectApath;
         private Guna.UI2.WinForms.Guna2Button btnConvertToIcon;
-        private Label label13;
-        private Label label14;
+        private Label txtNewIconName;
+        private Label txtOrginalPng;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
-        private Label label15;
+        private Label txtNewIcon;
         private Guna.UI2.WinForms.Guna2TextBox txtIconName;
         private Label label8;
     }

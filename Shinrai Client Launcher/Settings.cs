@@ -232,9 +232,32 @@ namespace Shinrai_Client_Launcher
 
         }
 
+
+        
         private void Settings_Load(object sender, EventArgs e)
         {
             AddItemsToComboBox();
+            LoadLanguage();
+        }
+
+        void LoadLanguage()
+        {
+            Translateable translateable = new Translateable();
+            translateable.LoadJson("ch_ma.json");
+            lblAboutProfile.Text = translateable.TranslatableText("launcher.settings.aboutprofile");
+            lblAutoIPAdress.Text = translateable.TranslatableText("launcher.settings.autoipadress");
+            lblAutoİp.Text = translateable.TranslatableText("launcher.settings.autoip");
+            lblLanguage.Text = translateable.TranslatableText("launcher.settings.language");
+            lblPN.Text = translateable.TranslatableText("launcher.settings.profilename");
+            txtProfileName.Text = translateable.TranslatableText("launcher.settings.profilename");
+            lblProfileIcon.Text = translateable.TranslatableText("launcher.settings.profileicon");
+            lblProfileName.Text = translateable.TranslatableText("launcher.settings.profilenamet");
+            lblRam.Text = translateable.TranslatableText("launcher.settings.ram");
+            lblResolution.Text = translateable.TranslatableText("launcher.settings.resolution");
+            lblSelectAccount.Text = translateable.TranslatableText("launcher.settings.selectaccount");
+            LblFullscreen.Text = translateable.TranslatableText("launcher.settings.fullscreen");
+            btnCreateFolder.Text = translateable.TranslatableText("launcher.settings.createfile");
+            txtIPAdress.Text = translateable.TranslatableText("launcher.settings.ıpadressplaceholder");
         }
 
         private void cmbResolution_SelectedIndexChanged(object sender, EventArgs e)

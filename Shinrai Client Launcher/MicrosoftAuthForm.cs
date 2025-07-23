@@ -27,6 +27,7 @@ namespace Shinrai_Client_Launcher
                 await webView21.EnsureCoreWebView2Async();
                 webView21.CoreWebView2.Navigate(authUrl);
             };
+            txt();
         }
 
         private void WebView21_NavigationStarting(object sender, CoreWebView2NavigationStartingEventArgs e)
@@ -74,10 +75,16 @@ namespace Shinrai_Client_Launcher
             return _tcsCode.Task;
         }
 
+        public void txt()
+        {
+            Translateable translateable = new Translateable();
+            translateable.LoadJson("ch_ma.json");
+            label1.Text = translateable.TranslatableText("launcher.microsoftauth.title");// Boşsa silebilirsin
+        }
         // Eğer bu method gereksizse silebilirsin
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
-            // Boşsa silebilirsin
+            
         }
     }
 }

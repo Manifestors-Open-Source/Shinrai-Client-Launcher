@@ -62,19 +62,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             pictureBox1 = new PictureBox();
-            label1 = new Label();
+            lblLogin = new Label();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
+            btnOfflineLogin = new Guna.UI2.WinForms.Guna2Button();
+            btnOnlineLogin = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            guna2Button8 = new Guna.UI2.WinForms.Guna2Button();
+            btnAccountManager = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            guna2Button7 = new Guna.UI2.WinForms.Guna2Button();
+            btnAddAccount = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel8 = new Guna.UI2.WinForms.Guna2Panel();
-            label8 = new Label();
-            label2 = new Label();
+            lblSelectAccount = new Label();
+            btnMainText = new Label();
             guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Button6 = new Guna.UI2.WinForms.Guna2Button();
             label3 = new Label();
@@ -108,17 +108,17 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // label1
+            // lblLogin
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Comfortaa", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(142, 27);
-            label1.Name = "label1";
-            label1.Size = new Size(76, 29);
-            label1.TabIndex = 0;
-            label1.Text = "Log In";
-            label1.Click += label1_Click;
+            lblLogin.AutoSize = true;
+            lblLogin.Font = new Font("Comfortaa", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            lblLogin.ForeColor = Color.White;
+            lblLogin.Location = new Point(142, 27);
+            lblLogin.Name = "lblLogin";
+            lblLogin.Size = new Size(76, 29);
+            lblLogin.TabIndex = 0;
+            lblLogin.Text = "Log In";
+            lblLogin.Click += label1_Click;
             // 
             // guna2Panel2
             // 
@@ -131,86 +131,86 @@
             guna2Panel2.Size = new Size(90, 10);
             guna2Panel2.TabIndex = 1;
             // 
-            // guna2TextBox1
+            // txtUsername
             // 
-            guna2TextBox1.BorderColor = Color.FromArgb(188, 0, 45);
-            guna2TextBox1.BorderRadius = 5;
-            guna2TextBox1.BorderThickness = 3;
-            guna2TextBox1.CustomizableEdges = customizableEdges25;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FillColor = Color.FromArgb(200, 0, 45);
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Font = new Font("Product Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            guna2TextBox1.ForeColor = Color.White;
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.IconLeft = Properties.Resources.IconUsernameV2;
-            guna2TextBox1.IconLeftOffset = new Point(1, 0);
-            guna2TextBox1.IconLeftSize = new Size(25, 25);
-            guna2TextBox1.IconRightSize = new Size(35, 35);
-            guna2TextBox1.Location = new Point(40, 154);
-            guna2TextBox1.Margin = new Padding(3, 5, 3, 5);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderForeColor = Color.Gainsboro;
-            guna2TextBox1.PlaceholderText = "Username";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            guna2TextBox1.Size = new Size(280, 46);
-            guna2TextBox1.TabIndex = 2;
-            guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
+            txtUsername.BorderColor = Color.FromArgb(188, 0, 45);
+            txtUsername.BorderRadius = 5;
+            txtUsername.BorderThickness = 3;
+            txtUsername.CustomizableEdges = customizableEdges25;
+            txtUsername.DefaultText = "";
+            txtUsername.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtUsername.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtUsername.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtUsername.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtUsername.FillColor = Color.FromArgb(200, 0, 45);
+            txtUsername.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtUsername.Font = new Font("Product Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            txtUsername.ForeColor = Color.White;
+            txtUsername.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtUsername.IconLeft = Properties.Resources.IconUsernameV2;
+            txtUsername.IconLeftOffset = new Point(1, 0);
+            txtUsername.IconLeftSize = new Size(25, 25);
+            txtUsername.IconRightSize = new Size(35, 35);
+            txtUsername.Location = new Point(40, 154);
+            txtUsername.Margin = new Padding(3, 5, 3, 5);
+            txtUsername.Name = "txtUsername";
+            txtUsername.PlaceholderForeColor = Color.Gainsboro;
+            txtUsername.PlaceholderText = "Username";
+            txtUsername.SelectedText = "";
+            txtUsername.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            txtUsername.Size = new Size(280, 46);
+            txtUsername.TabIndex = 2;
+            txtUsername.TextChanged += guna2TextBox1_TextChanged;
             // 
-            // guna2Button1
+            // btnOfflineLogin
             // 
-            guna2Button1.BorderRadius = 5;
-            guna2Button1.CustomizableEdges = customizableEdges23;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.FromArgb(100, 0, 0, 0);
-            guna2Button1.Font = new Font("Comfortaa", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(40, 221);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            guna2Button1.Size = new Size(280, 45);
-            guna2Button1.TabIndex = 3;
-            guna2Button1.Text = "Offline Login";
-            guna2Button1.Click += guna2Button1_Click;
+            btnOfflineLogin.BorderRadius = 5;
+            btnOfflineLogin.CustomizableEdges = customizableEdges23;
+            btnOfflineLogin.DisabledState.BorderColor = Color.DarkGray;
+            btnOfflineLogin.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnOfflineLogin.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnOfflineLogin.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnOfflineLogin.FillColor = Color.FromArgb(100, 0, 0, 0);
+            btnOfflineLogin.Font = new Font("Comfortaa", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            btnOfflineLogin.ForeColor = Color.White;
+            btnOfflineLogin.Location = new Point(40, 221);
+            btnOfflineLogin.Name = "btnOfflineLogin";
+            btnOfflineLogin.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            btnOfflineLogin.Size = new Size(280, 45);
+            btnOfflineLogin.TabIndex = 3;
+            btnOfflineLogin.Text = "Offline Login";
+            btnOfflineLogin.Click += guna2Button1_Click;
             // 
-            // guna2Button2
+            // btnOnlineLogin
             // 
-            guna2Button2.BorderRadius = 5;
-            guna2Button2.CustomizableEdges = customizableEdges21;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.FromArgb(100, 0, 0, 0);
-            guna2Button2.Font = new Font("Comfortaa", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.Image = Properties.Resources.Microsoft_Logo;
-            guna2Button2.Location = new Point(40, 271);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            guna2Button2.Size = new Size(280, 45);
-            guna2Button2.TabIndex = 4;
-            guna2Button2.Text = "Microsoft Login";
-            guna2Button2.Click += guna2Button2_Click;
+            btnOnlineLogin.BorderRadius = 5;
+            btnOnlineLogin.CustomizableEdges = customizableEdges21;
+            btnOnlineLogin.DisabledState.BorderColor = Color.DarkGray;
+            btnOnlineLogin.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnOnlineLogin.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnOnlineLogin.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnOnlineLogin.FillColor = Color.FromArgb(100, 0, 0, 0);
+            btnOnlineLogin.Font = new Font("Comfortaa", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            btnOnlineLogin.ForeColor = Color.White;
+            btnOnlineLogin.Image = Properties.Resources.Microsoft_Logo;
+            btnOnlineLogin.Location = new Point(40, 271);
+            btnOnlineLogin.Name = "btnOnlineLogin";
+            btnOnlineLogin.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            btnOnlineLogin.Size = new Size(280, 45);
+            btnOnlineLogin.TabIndex = 4;
+            btnOnlineLogin.Text = "Microsoft Login";
+            btnOnlineLogin.Click += guna2Button2_Click;
             // 
             // guna2Panel1
             // 
             guna2Panel1.BackColor = Color.FromArgb(0, 0, 0, 100);
             guna2Panel1.BorderRadius = 15;
-            guna2Panel1.Controls.Add(guna2Button8);
-            guna2Panel1.Controls.Add(guna2Button2);
-            guna2Panel1.Controls.Add(guna2Button1);
-            guna2Panel1.Controls.Add(guna2TextBox1);
+            guna2Panel1.Controls.Add(btnAccountManager);
+            guna2Panel1.Controls.Add(btnOnlineLogin);
+            guna2Panel1.Controls.Add(btnOfflineLogin);
+            guna2Panel1.Controls.Add(txtUsername);
             guna2Panel1.Controls.Add(guna2Panel2);
-            guna2Panel1.Controls.Add(label1);
+            guna2Panel1.Controls.Add(lblLogin);
             guna2Panel1.CustomizableEdges = customizableEdges29;
             guna2Panel1.FillColor = Color.FromArgb(100, 0, 0, 0);
             guna2Panel1.Location = new Point(448, 32);
@@ -221,33 +221,33 @@
             guna2Panel1.Visible = false;
             guna2Panel1.Paint += guna2Panel1_Paint;
             // 
-            // guna2Button8
+            // btnAccountManager
             // 
-            guna2Button8.BorderRadius = 5;
-            guna2Button8.CustomizableEdges = customizableEdges19;
-            guna2Button8.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button8.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button8.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button8.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button8.FillColor = Color.FromArgb(100, 0, 0, 0);
-            guna2Button8.Font = new Font("Comfortaa", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            guna2Button8.ForeColor = Color.White;
-            guna2Button8.Location = new Point(40, 322);
-            guna2Button8.Name = "guna2Button8";
-            guna2Button8.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            guna2Button8.Size = new Size(280, 45);
-            guna2Button8.TabIndex = 5;
-            guna2Button8.Text = "Account Manager";
-            guna2Button8.Click += guna2Button8_Click_1;
+            btnAccountManager.BorderRadius = 5;
+            btnAccountManager.CustomizableEdges = customizableEdges19;
+            btnAccountManager.DisabledState.BorderColor = Color.DarkGray;
+            btnAccountManager.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnAccountManager.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnAccountManager.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnAccountManager.FillColor = Color.FromArgb(100, 0, 0, 0);
+            btnAccountManager.Font = new Font("Comfortaa", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            btnAccountManager.ForeColor = Color.White;
+            btnAccountManager.Location = new Point(40, 322);
+            btnAccountManager.Name = "btnAccountManager";
+            btnAccountManager.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            btnAccountManager.Size = new Size(280, 45);
+            btnAccountManager.TabIndex = 5;
+            btnAccountManager.Text = "Account Manager";
+            btnAccountManager.Click += guna2Button8_Click_1;
             // 
             // guna2Panel6
             // 
             guna2Panel6.BackColor = Color.FromArgb(0, 0, 0, 100);
             guna2Panel6.BorderRadius = 15;
             guna2Panel6.Controls.Add(flowLayoutPanel1);
-            guna2Panel6.Controls.Add(guna2Button7);
+            guna2Panel6.Controls.Add(btnAddAccount);
             guna2Panel6.Controls.Add(guna2Panel8);
-            guna2Panel6.Controls.Add(label8);
+            guna2Panel6.Controls.Add(lblSelectAccount);
             guna2Panel6.CustomizableEdges = customizableEdges5;
             guna2Panel6.FillColor = Color.FromArgb(100, 0, 0, 0);
             guna2Panel6.Location = new Point(448, 32);
@@ -264,24 +264,24 @@
             flowLayoutPanel1.Size = new Size(366, 324);
             flowLayoutPanel1.TabIndex = 6;
             // 
-            // guna2Button7
+            // btnAddAccount
             // 
-            guna2Button7.BorderRadius = 5;
-            guna2Button7.CustomizableEdges = customizableEdges1;
-            guna2Button7.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button7.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button7.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button7.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button7.FillColor = Color.FromArgb(100, 0, 0, 0);
-            guna2Button7.Font = new Font("Comfortaa", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            guna2Button7.ForeColor = Color.White;
-            guna2Button7.Location = new Point(19, 411);
-            guna2Button7.Name = "guna2Button7";
-            guna2Button7.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Button7.Size = new Size(323, 45);
-            guna2Button7.TabIndex = 5;
-            guna2Button7.Text = "Add New Accouınt";
-            guna2Button7.Click += guna2Button7_Click_2;
+            btnAddAccount.BorderRadius = 5;
+            btnAddAccount.CustomizableEdges = customizableEdges1;
+            btnAddAccount.DisabledState.BorderColor = Color.DarkGray;
+            btnAddAccount.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnAddAccount.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnAddAccount.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnAddAccount.FillColor = Color.FromArgb(100, 0, 0, 0);
+            btnAddAccount.Font = new Font("Comfortaa", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            btnAddAccount.ForeColor = Color.White;
+            btnAddAccount.Location = new Point(19, 411);
+            btnAddAccount.Name = "btnAddAccount";
+            btnAddAccount.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnAddAccount.Size = new Size(323, 45);
+            btnAddAccount.TabIndex = 5;
+            btnAddAccount.Text = "Add New Accouınt";
+            btnAddAccount.Click += guna2Button7_Click_2;
             // 
             // guna2Panel8
             // 
@@ -294,28 +294,28 @@
             guna2Panel8.Size = new Size(90, 10);
             guna2Panel8.TabIndex = 1;
             // 
-            // label8
+            // lblSelectAccount
             // 
-            label8.Font = new Font("Comfortaa", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label8.ForeColor = Color.White;
-            label8.Location = new Point(3, 27);
-            label8.Name = "label8";
-            label8.Size = new Size(354, 29);
-            label8.TabIndex = 0;
-            label8.Text = "Select Account";
-            label8.TextAlign = ContentAlignment.MiddleCenter;
+            lblSelectAccount.Font = new Font("Comfortaa", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            lblSelectAccount.ForeColor = Color.White;
+            lblSelectAccount.Location = new Point(3, 27);
+            lblSelectAccount.Name = "lblSelectAccount";
+            lblSelectAccount.Size = new Size(354, 29);
+            lblSelectAccount.TabIndex = 0;
+            lblSelectAccount.Text = "Select Account";
+            lblSelectAccount.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // btnMainText
             // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Comfortaa", 17.9999981F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(29, 186);
-            label2.Name = "label2";
-            label2.Size = new Size(380, 114);
-            label2.TabIndex = 0;
-            label2.Text = "Open Source Hacked Client. \r\nAs trustable as our name, \r\nas transparent as water.";
+            btnMainText.AutoSize = true;
+            btnMainText.BackColor = Color.Transparent;
+            btnMainText.Font = new Font("Comfortaa", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnMainText.ForeColor = Color.White;
+            btnMainText.Location = new Point(64, 211);
+            btnMainText.Name = "btnMainText";
+            btnMainText.Size = new Size(303, 87);
+            btnMainText.TabIndex = 0;
+            btnMainText.Text = "Open Source Hacked Client. \r\nAs trustable as our name, \r\nas transparent as water.";
             // 
             // guna2Panel4
             // 
@@ -452,7 +452,7 @@
             Controls.Add(guna2Panel6);
             Controls.Add(label4);
             Controls.Add(guna2Panel3);
-            Controls.Add(label2);
+            Controls.Add(btnMainText);
             Controls.Add(guna2Panel1);
             Controls.Add(pictureBox1);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 162);
@@ -476,13 +476,13 @@
 
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
         private PictureBox pictureBox1;
-        private Label label2;
+        private Label btnMainText;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2Button btnOnlineLogin;
+        private Guna.UI2.WinForms.Guna2Button btnOfflineLogin;
+        private Guna.UI2.WinForms.Guna2TextBox txtUsername;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-        private Label label1;
+        private Label lblLogin;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
         private Guna.UI2.WinForms.Guna2Button guna2Button6;
         private Label label3;
@@ -492,10 +492,10 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel6;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel8;
-        private Label label8;
-        private Guna.UI2.WinForms.Guna2Button guna2Button7;
+        private Label lblSelectAccount;
+        private Guna.UI2.WinForms.Guna2Button btnAddAccount;
         private FlowLayoutPanel flowLayoutPanel1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button8;
+        private Guna.UI2.WinForms.Guna2Button btnAccountManager;
         private Label label4;
     }
 }

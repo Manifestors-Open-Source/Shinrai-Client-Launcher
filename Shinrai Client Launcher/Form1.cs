@@ -48,7 +48,23 @@ namespace Shinrai_Client_Launcher
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadAccountsFromJson("accounts.json");
+            LanguageLoad();
         }
+
+        void LanguageLoad()
+        {
+            Translateable translateable = new Translateable();
+            translateable.LoadJson("ch_ma.json");
+            lblLogin.Text = translateable.TranslatableText("launcher.loginpage.login");
+            txtUsername.PlaceholderText = translateable.TranslatableText("launcher.loginpage.nametext");
+            btnOfflineLogin.Text = translateable.TranslatableText("launcher.loginpage.offlinelogin");
+            btnOfflineLogin.Text = translateable.TranslatableText("launcher.loginpage.onlinelogin");
+            btnAccountManager.Text = translateable.TranslatableText("launcher.loginpage.accountmanager");
+            lblSelectAccount.Text = translateable.TranslatableText("launcher.loginpage.selectaccount");
+            btnAddAccount.Text = translateable.TranslatableText("launcher.loginpage.addnewaccount");
+            btnMainText.Text = translateable.TranslatableText("launcher.loginpage.motto");
+        }
+
         private void LoadAccountsFromJson(string filePath)
         {
             if (!File.Exists(filePath))
@@ -271,7 +287,7 @@ namespace Shinrai_Client_Launcher
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            AddAccountToJson("accounts.json", guna2TextBox1.Text, AccountType.Offline, "");
+            AddAccountToJson("accounts.json", txtUsername.Text, AccountType.Offline, "");
             flowLayoutPanel1.Controls.Clear();
             LoadAccountsFromJson("accounts.json");
             guna2Panel1.Hide();

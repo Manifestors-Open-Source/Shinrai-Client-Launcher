@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -73,13 +74,25 @@ namespace Shinrai_Client_Launcher
 
         private void MainScreen_Load_1(object sender, EventArgs e)
         {
+            LanguageLoad();
+
             guna2ComboBox1.SelectedItem = "1.21.7";
             AddProfilesToCombobox();
             labelUsername.Text = Form1.SelectedAccountName;
             labelAccounttype.Text = Form1.SelectedAccountType.ToString();
             ProfilPictureBox.Image = LoadSkin(Form1.SelectedAccountName);
         }
-
+        void LanguageLoad()
+        {
+            Translateable translateable = new Translateable();
+            translateable.LoadJson("ch_ma.json");
+            txtVersion.Text = translateable.TranslatableText("launcher.mainpage.version");
+            txtSettingsProfile.Text = translateable.TranslatableText("launcher.mainpage.startoptions");
+            txtSelectAccount.Text = translateable.TranslatableText("launcher.mainpage.startoptions");
+            txtLauncherVersion.Text = translateable.TranslatableText("launcher.mainpage.launcherversion");
+            txtMotto.Text = translateable.TranslatableText("launcher.loginpage.motto");
+            guna2Button7.Text = translateable.TranslatableText("launcher.mainpage.startclient");
+        }
         private void guna2Button5_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -98,6 +111,49 @@ namespace Shinrai_Client_Launcher
         private void guna2ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void guna2Button7_Click(object sender, EventArgs e)
+        {
+            var javaPath = @"java";  // Eğer Java PATH'teyse sadece "java", değilse tam yolu ver
+            var workingDir = @"F:\Shinrai1";  // Proje dizini veya istediğin çalışma dizini
+
+            // Java komut satırı argümanları
+            var arguments = "-Xmx2G " +
+                            "-Dfabric.dli.config=\"F:\\Shinrai1\\.gradle\\loom-cache\\launch.cfg\" " +
+                            "-Dfabric.dli.env=client " +
+                            "-Dfabric.dli.main=net.fabricmc.loader.impl.launch.knot.KnotClient " +
+                            "-cp \".gradle\\loom-cache\\launch.jar\" " +
+                            "net.fabricmc.devlaunchinjector.Main";
+
+            var processInfo = new ProcessStartInfo
+            {
+                FileName = javaPath,
+                Arguments = arguments,
+                WorkingDirectory = workingDir,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
+
+            var process = new Process { StartInfo = processInfo };
+
+            process.OutputDataReceived += (sender, e) => {
+                if (!string.IsNullOrEmpty(e.Data))
+                    Console.WriteLine("[Java stdout] " + e.Data);
+            };
+
+            process.ErrorDataReceived += (sender, e) => {
+                if (!string.IsNullOrEmpty(e.Data))
+                    Console.WriteLine("[Java stderr] " + e.Data);
+            };
+
+            process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            process.WaitForExit();
         }
     }
 }

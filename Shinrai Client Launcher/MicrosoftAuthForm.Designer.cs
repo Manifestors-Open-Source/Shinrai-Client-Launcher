@@ -100,14 +100,14 @@
             // 
             // label1
             // 
-            label1.AutoSize = true;
             label1.Font = new Font("Comfortaa", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(128, 29);
+            label1.Location = new Point(16, 29);
             label1.Name = "label1";
-            label1.Size = new Size(171, 29);
+            label1.Size = new Size(403, 29);
             label1.TabIndex = 0;
             label1.Text = "Microsoft Login";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // MicrosoftAuthForm
             // 
@@ -121,7 +121,6 @@
             Name = "MicrosoftAuthForm";
             Text = "MicrosoftAuthForm";
             guna2Panel1.ResumeLayout(false);
-            guna2Panel1.PerformLayout();
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
             ResumeLayout(false);
