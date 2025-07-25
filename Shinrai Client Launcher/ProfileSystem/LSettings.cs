@@ -20,7 +20,7 @@ namespace Shinrai_Client_Launcher.ProfileSystem
         public bool FullScreen { get; set; }
         public bool AutoIP { get; set; }
         public string AutoIPAdresS { get; set; }
-        public Lang Langu { get; set; }
+        public string Langu { get; set; }
         
     }
 }

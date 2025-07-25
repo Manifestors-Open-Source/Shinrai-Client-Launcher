@@ -307,15 +307,15 @@
             // 
             // btnMainText
             // 
-            btnMainText.AutoSize = true;
             btnMainText.BackColor = Color.Transparent;
             btnMainText.Font = new Font("Comfortaa", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
             btnMainText.ForeColor = Color.White;
-            btnMainText.Location = new Point(64, 211);
+            btnMainText.Location = new Point(12, 211);
             btnMainText.Name = "btnMainText";
-            btnMainText.Size = new Size(303, 87);
+            btnMainText.Size = new Size(430, 122);
             btnMainText.TabIndex = 0;
             btnMainText.Text = "Open Source Hacked Client. \r\nAs trustable as our name, \r\nas transparent as water.";
+            btnMainText.TextAlign = ContentAlignment.TopCenter;
             // 
             // guna2Panel4
             // 
@@ -469,7 +469,6 @@
             guna2Panel4.PerformLayout();
             guna2Panel3.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion

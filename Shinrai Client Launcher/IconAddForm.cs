@@ -60,7 +60,7 @@ namespace Shinrai_Client_Launcher
         private void IconAddForm_Load(object sender, EventArgs e)
         {
             Translateable translateable = new Translateable();
-            translateable.LoadJson("ch_ma.json");
+            translateable.LoadJson(Properties.Settings.Default.Language);
             txtIconName.PlaceholderText = translateable.TranslatableText("launcher.iconform.iconnameplcholder");
             txtNewIcon.Text = translateable.TranslatableText("launcher.iconform.icontxtenter");
             txtNewIconName.Text = translateable.TranslatableText("launcher.iconform.ıconname");

@@ -85,7 +85,7 @@ namespace Shinrai_Client_Launcher
         void LanguageLoad()
         {
             Translateable translateable = new Translateable();
-            translateable.LoadJson("ch_ma.json");
+            translateable.LoadJson(Properties.Settings.Default.Language);
             txtVersion.Text = translateable.TranslatableText("launcher.mainpage.version");
             txtSettingsProfile.Text = translateable.TranslatableText("launcher.mainpage.startoptions");
             txtSelectAccount.Text = translateable.TranslatableText("launcher.mainpage.startoptions");

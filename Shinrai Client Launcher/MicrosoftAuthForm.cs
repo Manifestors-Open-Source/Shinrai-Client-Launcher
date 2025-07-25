@@ -78,7 +78,7 @@ namespace Shinrai_Client_Launcher
         public void txt()
         {
             Translateable translateable = new Translateable();
-            translateable.LoadJson("ch_ma.json");
+            translateable.LoadJson(Properties.Settings.Default.Language);
             label1.Text = translateable.TranslatableText("launcher.microsoftauth.title");// Boşsa silebilirsin
         }
         // Eğer bu method gereksizse silebilirsin

@@ -54,11 +54,11 @@ namespace Shinrai_Client_Launcher
         void LanguageLoad()
         {
             Translateable translateable = new Translateable();
-            translateable.LoadJson("ch_ma.json");
+            translateable.LoadJson(Properties.Settings.Default.Language);
             lblLogin.Text = translateable.TranslatableText("launcher.loginpage.login");
             txtUsername.PlaceholderText = translateable.TranslatableText("launcher.loginpage.nametext");
             btnOfflineLogin.Text = translateable.TranslatableText("launcher.loginpage.offlinelogin");
-            btnOfflineLogin.Text = translateable.TranslatableText("launcher.loginpage.onlinelogin");
+            btnOnlineLogin.Text = translateable.TranslatableText("launcher.loginpage.onlinelogin");
             btnAccountManager.Text = translateable.TranslatableText("launcher.loginpage.accountmanager");
             lblSelectAccount.Text = translateable.TranslatableText("launcher.loginpage.selectaccount");
             btnAddAccount.Text = translateable.TranslatableText("launcher.loginpage.addnewaccount");

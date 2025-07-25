@@ -19,6 +19,7 @@ namespace Shinrai_Client_Launcher
     public partial class Settings : Form
     {
         ProfileSystem.Profile SelectedProfile = new ProfileSystem.Profile();
+        List<Language> languages = new List<Language>();
         public enum Lang
         {
             Turkish,
@@ -64,12 +65,20 @@ namespace Shinrai_Client_Launcher
         }
         void AddLanguageToCombobox()
         {
-            List<Lang> langs = new List<Lang>() { Lang.Japanese, Lang.English, Lang.German, Lang.Turkish };
-            foreach (Lang lang in langs)
+            string[] dosyalar = Directory.GetFiles(@"Languages", "*.shinrailang");
+            Translateable translateable = new Translateable();
+
+            foreach (string s in dosyalar)
             {
-                cmbLanguage.Items.Add(lang);
+                translateable.LoadJson(s);
+                Language language = new Language()
+                {
+                    LanguageCode = s,
+                    LanguageName = translateable.TranslatableText("launcher.language"),
+                };
+                languages.Add(language);
+                cmbLanguage.Items.Add(language.LanguageName);
             }
-            cmbLanguage.SelectedItem = Lang.English;
         }
         void AddRamSettingsToComboBox()
         {
@@ -141,8 +150,9 @@ namespace Shinrai_Client_Launcher
                 ıconAddForm.Show();
                 this.Hide();
             }
-            else { 
-            pbxProfileIcn.BackgroundImage = LoadManifestorspicturefile(System.Windows.Forms.Application.StartupPath + @"\profiles\icons\" + cmbProfileIcon.Text);
+            else
+            {
+                pbxProfileIcn.BackgroundImage = LoadManifestorspicturefile(System.Windows.Forms.Application.StartupPath + @"\profiles\icons\" + cmbProfileIcon.Text);
             }
         }
         void AddIconsToCombobox()
@@ -175,7 +185,6 @@ namespace Shinrai_Client_Launcher
                 if (txtProfileName.Text != lblProfileName.Text + ".shinrai")
                 {
                     string langStr = cmbLanguage.Text;
-                    LSettings.Lang langValue = (LSettings.Lang)Enum.Parse(typeof(LSettings.Lang), langStr);
                     ProfileSystem.LSettings SSettings = new ProfileSystem.LSettings()
                     {
                         Ram = Convert.ToInt16(cmbRam.Text),
@@ -183,7 +192,7 @@ namespace Shinrai_Client_Launcher
                         FullScreen = tswFullScreen.Checked,
                         AutoIP = tswIPState.Checked,
                         AutoIPAdresS = txtIPAdress.Text,
-                        Langu = langValue,
+                        Langu = langStr,
 
 
                     };
@@ -201,7 +210,6 @@ namespace Shinrai_Client_Launcher
                 else
                 {
                     string langStr = cmbLanguage.Text;
-                    LSettings.Lang langValue = (LSettings.Lang)Enum.Parse(typeof(LSettings.Lang), langStr);
                     ProfileSystem.LSettings SSettings = new ProfileSystem.LSettings()
                     {
                         Ram = Convert.ToInt16(cmbRam.Text),
@@ -209,7 +217,7 @@ namespace Shinrai_Client_Launcher
                         FullScreen = tswFullScreen.Checked,
                         AutoIP = tswIPState.Checked,
                         AutoIPAdresS = txtIPAdress.Text,
-                        Langu = langValue,
+                        Langu = langStr,
 
 
                     };
@@ -233,7 +241,7 @@ namespace Shinrai_Client_Launcher
         }
 
 
-        
+
         private void Settings_Load(object sender, EventArgs e)
         {
             AddItemsToComboBox();
@@ -243,13 +251,13 @@ namespace Shinrai_Client_Launcher
         void LoadLanguage()
         {
             Translateable translateable = new Translateable();
-            translateable.LoadJson("ch_ma.json");
+            translateable.LoadJson(Properties.Settings.Default.Language);
             lblAboutProfile.Text = translateable.TranslatableText("launcher.settings.aboutprofile");
             lblAutoIPAdress.Text = translateable.TranslatableText("launcher.settings.autoipadress");
             lblAutoİp.Text = translateable.TranslatableText("launcher.settings.autoip");
             lblLanguage.Text = translateable.TranslatableText("launcher.settings.language");
             lblPN.Text = translateable.TranslatableText("launcher.settings.profilename");
-            txtProfileName.Text = translateable.TranslatableText("launcher.settings.profilename");
+            txtProfileName.PlaceholderText = translateable.TranslatableText("launcher.settings.profilename");
             lblProfileIcon.Text = translateable.TranslatableText("launcher.settings.profileicon");
             lblProfileName.Text = translateable.TranslatableText("launcher.settings.profilenamet");
             lblRam.Text = translateable.TranslatableText("launcher.settings.ram");
@@ -299,6 +307,14 @@ namespace Shinrai_Client_Launcher
             this.Hide();
             MainScreen mainScreen = new MainScreen();
             mainScreen.Show();
+        }
+
+        private void cmbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Language selected = languages.FirstOrDefault(h => h.LanguageName == cmbLanguage.SelectedItem.ToString());
+            Properties.Settings.Default.Language = selected.LanguageCode;
+            Properties.Settings.Default.Save();
+            LoadLanguage();
         }
     }
 }
